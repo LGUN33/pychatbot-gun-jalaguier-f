@@ -56,13 +56,12 @@ def TF_IDF() :
 
 chirac1 = 'Nomination_Chirac1.txt'
 chirac2 = 'Nomination_Chirac2.txt'
-giscard = 'Nomination_giscard Estaing.txt'
+giscard = 'Nomination_giscard dEstaing.txt'
 hollande = 'Nomination_Hollande.txt'
-macron = 'sNomination_Macron.txt'
-mitterand1 = 'Nomination_Mittérand1.txt'
-mitterand2 = 'Nomination_Mittérand2.txt'
+macron = 'Nomination_Macron.txt'
+mitterand1 = 'Nomination_Mitterrand1.txt'
+mitterand2 = 'Nomination_Mitterrand2.txt'
 sarkozy = 'Nomination_Sarkozy.txt'
-
 
 #convertir_minuscule(chirac1)
 #supprime_ponctuation(chirac1)
