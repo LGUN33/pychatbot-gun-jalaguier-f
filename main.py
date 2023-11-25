@@ -68,7 +68,6 @@ def recup_nom(liste):
     return nom
 
 
-
 def ajout_prenom(list):
     nom=recup_nom(list)
     nomprenom={}
@@ -83,26 +82,15 @@ def ajout_prenom(list):
     print(nomprenom)
 
 
-
 def TF(ch):
     TF={}
-    mot=''
+    ch=ch.split()
     for elt in ch:
-        if ord(elt) != 32 :
-            mot+=elt
-            if elt==ch[-1]:
-                if mot not in TF:
-                    TF[mot]= 1
-                else:
-                    TF[mot]+=1
-        elif ord(elt)==32 :
-            if mot not in TF:
-                TF[mot]=1
-            else:
-                TF[mot]+=1
-            mot=''
-    return TF
-
+        if elt not in TF:
+            TF[elt]=1
+        else:
+            TF[elt]+=1
+    print(TF)
 
 
 def IDF(repertoire):
@@ -129,18 +117,7 @@ def IDF(repertoire):
     return IDF
 
 
-
-directory = "./speeches"
-files_names = list_of_files(directory, "txt")
-
-
-ajout_prenom(files_names)
-
-with open('doc.txt', "r")as ch:
-     c = ch.read()
-TF(c)
-
-
+#ajout_prenom(files_names)
 
 
 chirac1 = 'Nomination_Chirac1.txt'
@@ -156,5 +133,6 @@ sarkozy = 'Nomination_Sarkozy.txt'
 #supprime_ponctuation(chirac1)
 
 
-
-
+with open("cleaned/" + chirac1, "r") as ch:
+    c = ch.read()
+TF(c)
