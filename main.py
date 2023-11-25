@@ -89,5 +89,4 @@ with open('doc.txt', "r")as ch:
      c = ch.read()
 TF(c)
 
-print("d")
-print("test branche")
+print("test fini")
