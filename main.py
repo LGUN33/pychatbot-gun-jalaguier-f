@@ -87,4 +87,4 @@ ajout_prenom(files_names)
 
 with open('doc.txt', "r")as ch:
      c = ch.read()
-TF(hg)
+TF(c)
