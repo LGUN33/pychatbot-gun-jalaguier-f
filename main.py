@@ -97,14 +97,14 @@ def IDF(repertoire):
     directory = "./"+repertoire
     files_names = list_of_files(directory, "txt")
     taille= len(files_names)
-    list_mot=[]
+    liste_mot=[]
     for elt in files_names:
         chemin = os.path.join(directory, elt)
         with open(chemin, "r") as doc:
             contenu = doc.read()
             contenu=contenu.split()
-            list_mot+=contenu
-    list_mot=set(list_mot)
+            liste_mot+=contenu
+    list_mot=set(liste_mot)
     IDF={}
     for mot in list_mot:
         occurence=0
@@ -114,7 +114,7 @@ def IDF(repertoire):
                 contenu = doc.read()
                 if mot in contenu:
                     occurence+=1
-        score=math.log10((taille/occurence+1))
+        score=math.log(taille/(occurence))
         IDF[mot]=score
     return IDF
 
@@ -136,6 +136,7 @@ def TF_IDF(repertoire):
                 valeur_tf = tf.get(mot, 0)
                 L.append(valeur_tf * valeur_idf)
         matrice[mot]=L
+    print(matrice)
     return matrice
 
 def mot_non_important(repertoire):
@@ -204,7 +205,7 @@ sarkozy = 'Nomination_Sarkozy.txt'
 #supprime_ponctuation(chirac1)
 
 
-# TF_IDF("cleaned")
+TF_IDF("cleaned")
 # mot_non_important("cleaned")
 plusgrand_TF_IDF("cleaned")
 # IDF("cleaned")
