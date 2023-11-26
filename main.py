@@ -138,6 +138,24 @@ def TF_IDF(repertoire):
         matrice.append(L)
     return matrice
 
+def mot_non_important(repertoire):
+    matrice=TF_IDF(repertoire)
+    mot=[]
+    n=0
+    for i in range(len(matrice)):
+        j=0
+        while j<=len(matrice[i]) and n==0:
+            j+=1
+            if matrice[i][j]!=0:
+                n=1
+        if n!=1:
+            mot.append(matrice[i])
+    print(mot)
+    return mot
+
+
+
+
 #ajout_prenom(files_names)
 
 
@@ -154,4 +172,5 @@ sarkozy = 'Nomination_Sarkozy.txt'
 #supprime_ponctuation(chirac1)
 
 
-TF_IDF("cleaned")
+#TF_IDF("cleaned")
+mot_non_important("cleaned")
