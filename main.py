@@ -143,15 +143,11 @@ def mot_non_important(repertoire):
     mot=[]
     n=True
     for key,val in matrice.items():
-        print(key,val)
         j=0
-        while j<=8 and n==True:
-            if val[j]!=0.0:
-                n=False
+        while j<8 and val[j]!=0.0:
             j += 1
-        if n==True:
+        if j==8:
             mot.append(key)
-    print(mot)
     return mot
 
 def pluselever(repertoire):
@@ -192,6 +188,6 @@ sarkozy = 'Nomination_Sarkozy.txt'
 
 
 # TF_IDF("cleaned")
-mot_non_important("cleaned")
+# mot_non_important("cleaned")
 # pluselever("cleaned")
 # IDF("cleaned")
