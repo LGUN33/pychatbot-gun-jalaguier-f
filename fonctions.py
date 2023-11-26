@@ -213,10 +213,24 @@ def nation(repertoire):
         if val>max:
             max=val
             nom_final=nom
-    print(list_nom,nom_final)
     return list_nom,nom_final
 
 
+def mot_dit(repertoire):
+    mot_important=[]
+    matrice=TF_IDF(repertoire)
+    non_important=mot_non_important(repertoire)
+    for elt in non_important:
+        del matrice[elt]
+    for mot,val in matrice.items():
+        i=0
+        while i<len(matrice[mot]) and val[i]!=0.0 :
+            i+=1
+        if i == 8:
+            mot_important.append(mot)
+    return mot_important
+
+# mot_dit("cleaned")
 
 chirac1 = 'Nomination_Chirac1.txt'
 chirac2 = 'Nomination_Chirac2.txt'
@@ -232,7 +246,7 @@ sarkozy = 'Nomination_Sarkozy.txt'
 # convertir_minuscule(chirac1)
 # supprime_ponctuation(chirac1)
 # ajout_prenom("cleaned")
-# TF_IDF("cleaned"))
+print(TF_IDF("cleaned"))
 # mot_non_important("cleaned")
 # plusgrand_TF_IDF("cleaned")
 # IDF("cleaned")
