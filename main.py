@@ -180,6 +180,7 @@ def plusgrand_TF_IDF(repertoire):
                 mot_score=score[j]
         if mot_score>max_score:
             max_score=mot_score
+            max_mot=[]
             max_mot.append(mot)
         elif mot_score==max_score:
             max_mot.append(mot)
