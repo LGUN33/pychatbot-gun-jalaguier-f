@@ -114,13 +114,13 @@ def IDF(repertoire):
                 contenu = doc.read()
                 if mot in contenu:
                     occurence+=1
-        score=math.log10((taille/occurence)+1)
+        score=math.log10((taille/occurence+1))
         IDF[mot]=score
     return IDF
 
 
 def TF_IDF(repertoire):
-    matrice = []
+    matrice = {}
     directory = "./" + repertoire
     files_names = list_of_files(directory, "txt")
     # Calcul de la liste de mots unique dans tous les documents
@@ -135,24 +135,43 @@ def TF_IDF(repertoire):
                 valeur_idf = idf.get(mot, 0)
                 valeur_tf = tf.get(mot, 0)
                 L.append(valeur_tf * valeur_idf)
-        matrice.append(L)
+        matrice[mot]=L
     return matrice
 
 def mot_non_important(repertoire):
     matrice=TF_IDF(repertoire)
     mot=[]
-    n=0
-    for i in range(len(matrice)):
+    n=True
+    for key,val in matrice.items():
+        print(key,val)
         j=0
-        while j<=len(matrice[i]) and n==0:
-            j+=1
-            if matrice[i][j]!=0:
-                n=1
-        if n!=1:
-            mot.append(matrice[i])
+        while j<=8 and n==True:
+            if val[j]!=0.0:
+                n=False
+            j += 1
+        if n==True:
+            mot.append(key)
     print(mot)
     return mot
 
+def pluselever(repertoire):
+    ligne=IDF(repertoire)
+    matrice = TF_IDF(repertoire)
+    mot=[]
+    max=0
+    i=-1
+    for val in ligne.keys():
+        i+=1
+        score=0
+        for j in range(len(matrice[i])):
+            score+=matrice[i][j]
+        if score>max:
+            mot=[]
+            mot.append(val)
+        elif score==max:
+            mot.append(val)
+    print(mot)
+    return mot
 
 
 
@@ -172,5 +191,7 @@ sarkozy = 'Nomination_Sarkozy.txt'
 #supprime_ponctuation(chirac1)
 
 
-#TF_IDF("cleaned")
+# TF_IDF("cleaned")
 mot_non_important("cleaned")
+# pluselever("cleaned")
+# IDF("cleaned")
