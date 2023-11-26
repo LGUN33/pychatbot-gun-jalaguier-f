@@ -167,8 +167,7 @@ def plusgrand_TF_IDF(repertoire):
             max_mot.append(mot)
         elif mot_score==max_score:
             max_mot.append(mot)
-    print(max_mot,max_score)
-    return max_mot
+    return max_mot,max_score
 
 
 def mot_chirac():
@@ -196,18 +195,28 @@ def nation(repertoire):
         chemin = os.path.join(directory, files_names[i])
         with open(chemin, "r") as doc:
             contenu = doc.read()
+            contenu = contenu.split()
             if "nation" in contenu:
                 nbr=0
                 president = files_names[i][11:-4]
                 code_asci = ord(president[-1])
                 if code_asci >= 48 and code_asci <= 57:
                     president=president[0:-1]
+                list_nom[president] = 0
                 for elt in contenu:
                     if elt=="nation":
                         nbr+=1
-                list_nom[president]=nbr
-    print(list_nom)
-nation("cleaned")
+                list_nom[president]+=nbr
+    max=0
+    nom_final=""
+    for nom,val in list_nom.items():
+        if val>max:
+            max=val
+            nom_final=nom
+    print(list_nom,nom_final)
+    return list_nom,nom_final
+
+
 
 chirac1 = 'Nomination_Chirac1.txt'
 chirac2 = 'Nomination_Chirac2.txt'
@@ -218,7 +227,7 @@ mitterand1 = 'Nomination_Mitterrand1.txt'
 mitterand2 = 'Nomination_Mitterrand2.txt'
 sarkozy = 'Nomination_Sarkozy.txt'
 
-
+# nation("cleaned")
 # mot_chirac()
 # convertir_minuscule(chirac1)
 # supprime_ponctuation(chirac1)
