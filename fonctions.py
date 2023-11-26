@@ -1,6 +1,7 @@
 import os
 import math
 
+
 def convertir_minuscule(fichi) :
 
     # Definir l'accès du fichier d'origine / arrivée
@@ -45,14 +46,12 @@ def supprime_ponctuation(fichi) :
             f.write(mot)
 
 
-
 def list_of_files(directory, extension):
     files_names = []
     for filename in os.listdir(directory):
         if filename.endswith(extension):
             files_names.append(filename)
     return files_names
-
 
 
 def recup_nom(repertoire):
@@ -68,6 +67,7 @@ def recup_nom(repertoire):
             nom.append(president)
     nom=set(nom)
     return nom
+
 
 def ajout_prenom(repertoire):
     nom=recup_nom(repertoire)
@@ -139,6 +139,7 @@ def TF_IDF(repertoire):
         matrice[mot]=L
     return matrice
 
+
 def mot_non_important(repertoire):
     matrice=TF_IDF(repertoire)
     mot=[]
@@ -171,7 +172,6 @@ def plusgrand_TF_IDF(repertoire):
 
 
 
-
 chirac1 = 'Nomination_Chirac1.txt'
 chirac2 = 'Nomination_Chirac2.txt'
 giscard = 'Nomination_Giscard dEstaing.txt'
@@ -181,10 +181,11 @@ mitterand1 = 'Nomination_Mitterrand1.txt'
 mitterand2 = 'Nomination_Mitterrand2.txt'
 sarkozy = 'Nomination_Sarkozy.txt'
 
+
+
 #convertir_minuscule(chirac1)
 #supprime_ponctuation(chirac1)
-
-ajout_prenom("cleaned")
+# ajout_prenom("cleaned")
 #TF_IDF("cleaned"))
 # mot_non_important("cleaned")
 #plusgrand_TF_IDF("cleaned")
