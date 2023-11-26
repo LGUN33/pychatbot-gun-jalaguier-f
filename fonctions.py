@@ -241,12 +241,15 @@ mitterand1 = 'Nomination_Mitterrand1.txt'
 mitterand2 = 'Nomination_Mitterrand2.txt'
 sarkozy = 'Nomination_Sarkozy.txt'
 
+
+
+#TEST :
 # nation("cleaned")
 # mot_chirac()
 # convertir_minuscule(chirac1)
 # supprime_ponctuation(chirac1)
 # ajout_prenom("cleaned")
-print(TF_IDF("cleaned"))
+#print(TF_IDF("cleaned"))
 # mot_non_important("cleaned")
 # plusgrand_TF_IDF("cleaned")
 # IDF("cleaned")
