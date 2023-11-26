@@ -69,9 +69,8 @@ def recup_nom(repertoire):
     nom=set(nom)
     return nom
 
-
-def ajout_prenom(list):
-    nom=recup_nom(list)
+def ajout_prenom(repertoire):
+    nom=recup_nom(repertoire)
     nomprenom={}
     for elt in nom:
         nomprenom[elt]=1
@@ -81,7 +80,7 @@ def ajout_prenom(list):
     nomprenom['Macron']='Emmanuel'
     nomprenom['Mitterrand']='François'
     nomprenom['Sarkozy']=('Nicolas')
-    return(nomprenom)
+    return nomprenom
 
 
 def TF(ch):
@@ -145,32 +144,13 @@ def mot_non_important(repertoire):
     mot=[]
     for key,val in matrice.items():
         j=0
-        while j<8 and matrice[key][j]==0.0:
+        while j<len(matrice[key]) and val[j]==0.0:
             j += 1
         if j==8:
             mot.append(key)
-    print(mot)
     return mot
 
 
-# def plusgrand_TF_IDF(repertoire):
-#     ligne=IDF(repertoire)
-#     matrice = TF_IDF(repertoire)
-#     mot=[]
-#     max=0
-#     i=-1
-#     for val in ligne.keys():
-#         i+=1
-#         score=0
-#         for j in range(len(matrice[i])):
-#             score+=matrice[i][j]
-#         if score>max:
-#             mot=[]
-#             mot.append(val)
-#         elif score==max:
-#             mot.append(val)
-#     print(mot)
-#     return mot
 def plusgrand_TF_IDF(repertoire):
     matrice=TF_IDF(repertoire)
     max_score=0
@@ -190,12 +170,11 @@ def plusgrand_TF_IDF(repertoire):
     return max_mot
 
 
-#ajout_prenom(files_names)
 
 
 chirac1 = 'Nomination_Chirac1.txt'
 chirac2 = 'Nomination_Chirac2.txt'
-giscard = 'Nomination_giscard dEstaing.txt'
+giscard = 'Nomination_Giscard dEstaing.txt'
 hollande = 'Nomination_Hollande.txt'
 macron = 'Nomination_Macron.txt'
 mitterand1 = 'Nomination_Mitterrand1.txt'
@@ -205,8 +184,8 @@ sarkozy = 'Nomination_Sarkozy.txt'
 #convertir_minuscule(chirac1)
 #supprime_ponctuation(chirac1)
 
-
+ajout_prenom("cleaned")
 #TF_IDF("cleaned"))
-mot_non_important("cleaned")
+# mot_non_important("cleaned")
 #plusgrand_TF_IDF("cleaned")
 # IDF("cleaned")
