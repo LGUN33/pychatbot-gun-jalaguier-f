@@ -90,16 +90,17 @@ def TF(ch):
             TF[elt]=1
         else:
             TF[elt]+=1
-    print(TF)
+    return TF
 
 
 def IDF(repertoire):
-    directory = "./",repertoire
+    directory = "./"+repertoire
     files_names = list_of_files(directory, "txt")
     taille= len(files_names)
     list_mot=[]
     for elt in files_names:
-        with open(elt, "r") as doc:
+        chemin = os.path.join(directory, elt)
+        with open(chemin, "r") as doc:
             contenu = doc.read()
             contenu=contenu.split()
             list_mot+=contenu
@@ -108,7 +109,8 @@ def IDF(repertoire):
     for mot in list_mot:
         occurence=0
         for elt in files_names:
-            with open(elt, "r") as doc:
+            chemin = os.path.join(directory, elt)
+            with open(chemin, "r") as doc:
                 contenu = doc.read()
                 if mot in contenu:
                     occurence+=1
@@ -116,6 +118,67 @@ def IDF(repertoire):
         IDF[mot]=score
     return IDF
 
+# def TF_IDF(repertoire):
+#     matrice=[]
+#     directory = "./"+repertoire
+#     files_names = list_of_files(directory, "txt")
+#     taille = len(files_names)
+#     list_mot = []
+#     for elt in files_names:
+#         chemin = os.path.join(directory, elt)
+#         with open(chemin, "r") as doc:
+#             contenu = doc.read()
+#             contenu = contenu.split()
+#             list_mot += contenu
+#     list_mot = list(set(list_mot))
+#     valeur_idf=0
+#     valeur_tf=0
+#     L=[]
+#     for i in range(len(list_mot)):
+#         for j in range(len(files_names)):
+#             chemin = os.path.join(directory, files_names[j])
+#             with open(chemin, "r") as doc:
+#                 contenu = doc.read()
+#                 tf=TF(contenu)
+#                 idf=IDF(repertoire)
+#                 for mot,val in idf.items():
+#                     if mot==list_mot[i]:
+#                         valeur_idf=val
+#                 for mot,val in tf.items():
+#                     if mot==list_mot[i]:
+#                         valeur_tf=val
+#                 L.append(valeur_tf*valeur_idf)
+#         matrice.append(L)
+#     print(matrice)
+#     return matrice
+
+def TF_IDF(repertoire):
+    matrice = []
+    directory = "./" + repertoire
+    files_names = list_of_files(directory, "txt")
+    list_mot = set()
+    # Calcul de la liste de mots unique dans tous les documents
+    for elt in files_names:
+        chemin = os.path.join(directory, elt)
+        with open(chemin, "r") as doc:
+            contenu = doc.read().split()
+            list_mot.update(contenu)
+    list_mot = list(list_mot)
+    for i in range(len(list_mot)):
+        L = []
+        for j in range(len(files_names)):
+            chemin = os.path.join(directory, files_names[j])
+            with open(chemin, "r") as doc:
+                contenu = doc.read()
+                tf = TF(contenu)
+                idf = IDF(repertoire)
+                valeur_idf = idf.get(list_mot[i], 0)
+                valeur_tf = tf.get(list_mot[i], 0)
+                L.append(valeur_tf * valeur_idf)
+                print(L)
+        matrice.append(L)
+        print(matrice)
+    return matrice
 
 #ajout_prenom(files_names)
 
@@ -133,6 +196,4 @@ sarkozy = 'Nomination_Sarkozy.txt'
 #supprime_ponctuation(chirac1)
 
 
-with open("cleaned/" + chirac1, "r") as ch:
-    c = ch.read()
-TF(c)
+TF_IDF("cleaned")
