@@ -141,34 +141,50 @@ def TF_IDF(repertoire):
 def mot_non_important(repertoire):
     matrice=TF_IDF(repertoire)
     mot=[]
-    n=True
     for key,val in matrice.items():
         j=0
-        while j<8 and val[j]!=0.0:
+        while j<8 and matrice[key][j]==0.0:
             j += 1
         if j==8:
             mot.append(key)
-    return mot
-
-def pluselever(repertoire):
-    ligne=IDF(repertoire)
-    matrice = TF_IDF(repertoire)
-    mot=[]
-    max=0
-    i=-1
-    for val in ligne.keys():
-        i+=1
-        score=0
-        for j in range(len(matrice[i])):
-            score+=matrice[i][j]
-        if score>max:
-            mot=[]
-            mot.append(val)
-        elif score==max:
-            mot.append(val)
     print(mot)
     return mot
 
+
+# def plusgrand_TF_IDF(repertoire):
+#     ligne=IDF(repertoire)
+#     matrice = TF_IDF(repertoire)
+#     mot=[]
+#     max=0
+#     i=-1
+#     for val in ligne.keys():
+#         i+=1
+#         score=0
+#         for j in range(len(matrice[i])):
+#             score+=matrice[i][j]
+#         if score>max:
+#             mot=[]
+#             mot.append(val)
+#         elif score==max:
+#             mot.append(val)
+#     print(mot)
+#     return mot
+def plusgrand_TF_IDF(repertoire):
+    matrice=TF_IDF(repertoire)
+    max_score=0
+    max_mot=[]
+    for mot,score in matrice.items():
+        mot_score=0
+        for j in range(8):
+            if score[j]>mot_score:
+                mot_score=score[j]
+        if mot_score>max_score:
+            max_score=mot_score
+            max_mot.append(mot)
+        elif mot_score==max_score:
+            max_mot.append(mot)
+    print(max_mot,max_score)
+    return max_mot
 
 
 #ajout_prenom(files_names)
@@ -189,5 +205,5 @@ sarkozy = 'Nomination_Sarkozy.txt'
 
 # TF_IDF("cleaned")
 # mot_non_important("cleaned")
-# pluselever("cleaned")
+plusgrand_TF_IDF("cleaned")
 # IDF("cleaned")
