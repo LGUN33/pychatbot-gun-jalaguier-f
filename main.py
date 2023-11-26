@@ -136,7 +136,6 @@ def TF_IDF(repertoire):
                 valeur_tf = tf.get(mot, 0)
                 L.append(valeur_tf * valeur_idf)
         matrice[mot]=L
-    print(matrice)
     return matrice
 
 def mot_non_important(repertoire):
@@ -205,9 +204,7 @@ sarkozy = 'Nomination_Sarkozy.txt'
 #supprime_ponctuation(chirac1)
 
 
-TF_IDF("cleaned")
+print(TF_IDF("cleaned"))
 # mot_non_important("cleaned")
 plusgrand_TF_IDF("cleaned")
 # IDF("cleaned")
-
-print("caca")
