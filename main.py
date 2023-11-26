@@ -55,7 +55,9 @@ def list_of_files(directory, extension):
 
 
 
-def recup_nom(liste):
+def recup_nom(repertoire):
+    directory = "./" + repertoire
+    liste = list_of_files(directory, "txt")
     nom=[]
     for elt in liste:
         president=elt[11:-4]
@@ -79,7 +81,7 @@ def ajout_prenom(list):
     nomprenom['Macron']='Emmanuel'
     nomprenom['Mitterrand']='François'
     nomprenom['Sarkozy']=('Nicolas')
-    print(nomprenom)
+    return(nomprenom)
 
 
 def TF(ch):
