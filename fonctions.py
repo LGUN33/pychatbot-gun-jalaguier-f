@@ -171,6 +171,43 @@ def plusgrand_TF_IDF(repertoire):
     return max_mot
 
 
+def mot_chirac():
+    contenu=""
+    for i in range(1,3):
+        chemin = os.path.join("./cleaned",'Nomination_Chirac'+str(i)+'.txt')
+        with open(chemin, "r") as doc:
+            contenu+=doc.read()
+    dico_mot=TF(contenu)
+    mot=""
+    TF_max=0
+    for elt,val in dico_mot.items():
+        if val>TF_max:
+            TF_max=val
+            mot=""
+            mot+=elt
+    return mot
+
+
+def nation(repertoire):
+    list_nom={}
+    directory = "./" + repertoire
+    files_names = list_of_files(directory, "txt")
+    for i in range(len(files_names)):
+        chemin = os.path.join(directory, files_names[i])
+        with open(chemin, "r") as doc:
+            contenu = doc.read()
+            if "nation" in contenu:
+                nbr=0
+                president = files_names[i][11:-4]
+                code_asci = ord(president[-1])
+                if code_asci >= 48 and code_asci <= 57:
+                    president=president[0:-1]
+                for elt in contenu:
+                    if elt=="nation":
+                        nbr+=1
+                list_nom[president]=nbr
+    print(list_nom)
+nation("cleaned")
 
 chirac1 = 'Nomination_Chirac1.txt'
 chirac2 = 'Nomination_Chirac2.txt'
@@ -182,11 +219,11 @@ mitterand2 = 'Nomination_Mitterrand2.txt'
 sarkozy = 'Nomination_Sarkozy.txt'
 
 
-
-#convertir_minuscule(chirac1)
-#supprime_ponctuation(chirac1)
+# mot_chirac()
+# convertir_minuscule(chirac1)
+# supprime_ponctuation(chirac1)
 # ajout_prenom("cleaned")
-#TF_IDF("cleaned"))
+# TF_IDF("cleaned"))
 # mot_non_important("cleaned")
-#plusgrand_TF_IDF("cleaned")
+# plusgrand_TF_IDF("cleaned")
 # IDF("cleaned")
