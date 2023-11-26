@@ -204,7 +204,7 @@ sarkozy = 'Nomination_Sarkozy.txt'
 #supprime_ponctuation(chirac1)
 
 
-print(TF_IDF("cleaned"))
-# mot_non_important("cleaned")
-plusgrand_TF_IDF("cleaned")
+#TF_IDF("cleaned"))
+mot_non_important("cleaned")
+#plusgrand_TF_IDF("cleaned")
 # IDF("cleaned")
