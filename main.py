@@ -118,66 +118,24 @@ def IDF(repertoire):
         IDF[mot]=score
     return IDF
 
-# def TF_IDF(repertoire):
-#     matrice=[]
-#     directory = "./"+repertoire
-#     files_names = list_of_files(directory, "txt")
-#     taille = len(files_names)
-#     list_mot = []
-#     for elt in files_names:
-#         chemin = os.path.join(directory, elt)
-#         with open(chemin, "r") as doc:
-#             contenu = doc.read()
-#             contenu = contenu.split()
-#             list_mot += contenu
-#     list_mot = list(set(list_mot))
-#     valeur_idf=0
-#     valeur_tf=0
-#     L=[]
-#     for i in range(len(list_mot)):
-#         for j in range(len(files_names)):
-#             chemin = os.path.join(directory, files_names[j])
-#             with open(chemin, "r") as doc:
-#                 contenu = doc.read()
-#                 tf=TF(contenu)
-#                 idf=IDF(repertoire)
-#                 for mot,val in idf.items():
-#                     if mot==list_mot[i]:
-#                         valeur_idf=val
-#                 for mot,val in tf.items():
-#                     if mot==list_mot[i]:
-#                         valeur_tf=val
-#                 L.append(valeur_tf*valeur_idf)
-#         matrice.append(L)
-#     print(matrice)
-#     return matrice
 
 def TF_IDF(repertoire):
     matrice = []
     directory = "./" + repertoire
     files_names = list_of_files(directory, "txt")
-    list_mot = set()
     # Calcul de la liste de mots unique dans tous les documents
-    for elt in files_names:
-        chemin = os.path.join(directory, elt)
-        with open(chemin, "r") as doc:
-            contenu = doc.read().split()
-            list_mot.update(contenu)
-    list_mot = list(list_mot)
-    for i in range(len(list_mot)):
+    idf = IDF(repertoire)
+    for mot in idf.keys():
         L = []
         for j in range(len(files_names)):
             chemin = os.path.join(directory, files_names[j])
             with open(chemin, "r") as doc:
                 contenu = doc.read()
                 tf = TF(contenu)
-                idf = IDF(repertoire)
-                valeur_idf = idf.get(list_mot[i], 0)
-                valeur_tf = tf.get(list_mot[i], 0)
+                valeur_idf = idf.get(mot, 0)
+                valeur_tf = tf.get(mot, 0)
                 L.append(valeur_tf * valeur_idf)
-                print(L)
         matrice.append(L)
-        print(matrice)
     return matrice
 
 #ajout_prenom(files_names)
