@@ -248,7 +248,7 @@ mitterand2 = 'Nomination_Mitterrand2.txt'
 sarkozy = 'Nomination_Sarkozy.txt'
 
 
-
+j
 #TEST :
 # print(nation("cleaned"))
 # print(mot_chirac())
