@@ -24,14 +24,14 @@ ________________________________fonction.py________________________________
 		- convertir_minuscule() : qui prend en argument le nom de l'un des 8 discours (chirac1, chirac2, giscard, hollande, macron, mitterand1, mitterand2, sarkizy). Elle convertie en minuscule le texte et crée un copie dans le dossier 'speeches'
 		- supprime_ponctuation() : argument et le même / supprime toutes les ponctuations du fichier et elle remplace le fichier
 
-	- La seconde est dédiée à la récupération des nom/prénom des présidents. voici les fonctions :
-		- list_of_files()
-		- recup_nom()
-		- ajout_prenom()
+	- La seconde est dédiée à la récupération des noms/prénoms des présidents. voici les fonctions :
+		- list_of_files() : retourne la liste des noms des documents
+		- recup_nom() : retourne la liste des noms des présidents à partir de la liste des documents
+		- ajout_prenom() : retourne un dictionnaire sous la forme : clé = Nom Valeur = Prénom
 
 	- La troisième partie est consacrée au TF-IDF :
 		- TF() : Calcule la frequence d'un mot dans un texte 
-		- IDF() : Associe un coefficien à chacun des mots présents dans les 6 textes
+		- IDF() : Associe un coefficien à chacun des mots présents dans les 8 textes
 		- TF_IDF() : multiplie TF et IDF, chaque mot à donc un score qui permet de connaitre l'importance de celui ci dans un texte. La fonction renvoie une matrice.
 		Les trois fonctions prennent en argument un répertoire de fichier contenant une chaine de caractère. Dans notre cas, c'est les 8 textes contenus dans 'speeches'
 
