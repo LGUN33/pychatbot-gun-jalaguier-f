@@ -1,7 +1,7 @@
 from fonctions import *
 import os
 
-os.system("cls")
+os.system("cls") # réinitialise la console
 
 print("\033[1;31m\nBienvenue sur 'My First Chat Bot' l'intelligence artificielle à la pointe de la technologie (équivalent de ChatGPT® 6) développée par Louis Gun et Frédéric Jalaguier")
 print("\033[1;34m\nVoici la liste des différentes actions que vous pouvez faire : \n")
@@ -15,7 +15,7 @@ print("\033[1;34mTappez 6 pour : "+"\033[1;35mAfficher le(s) mot(s) que tous les
 
 réponse = input("\033[1;31mSaisir votre choix : ")
 
-while réponse != '1' and réponse != '2' and réponse != '3' and réponse != '4' and réponse != '5' and réponse != '6' :
+while réponse != '1' and réponse != '2' and réponse != '3' and réponse != '4' and réponse != '5' and réponse != '6' : # saisie sécurisée (nombre entre 1 et 6)
     print("Merci de saisir un chiffre entre 1 et 6")
     réponse = input("\033[1;31mSaisir votre choix : ")
 
