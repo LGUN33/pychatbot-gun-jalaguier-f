@@ -199,13 +199,13 @@ def nation(repertoire):
         with open(chemin, "r") as doc:
             contenu = doc.read()
             contenu = contenu.split()
+            president = files_names[i][11:-4]
+            code_asci = ord(president[-1])
+            if code_asci >= 48 and code_asci <= 57:
+                president = president[0:-1]
+            list_nom[president]=list_nom.get(president,0)
             if "nation" in contenu:
                 nbr=0
-                president = files_names[i][11:-4]
-                code_asci = ord(president[-1])
-                if code_asci >= 48 and code_asci <= 57:
-                    president=president[0:-1]
-                list_nom[president] = 0
                 for elt in contenu:
                     if elt=="nation":
                         nbr+=1
@@ -248,9 +248,9 @@ mitterand2 = 'Nomination_Mitterrand2.txt'
 sarkozy = 'Nomination_Sarkozy.txt'
 
 
-j
+
 #TEST :
-# print(nation("cleaned"))
+print(nation("cleaned"))
 # print(mot_chirac())
 # print(convertir_minuscule(chirac1))
 # print(supprime_ponctuation(chirac1))
