@@ -250,7 +250,7 @@ sarkozy = 'Nomination_Sarkozy.txt'
 
 
 #TEST :
-print(nation("cleaned"))
+# print(nation("cleaned"))
 # print(mot_chirac())
 # print(convertir_minuscule(chirac1))
 # print(supprime_ponctuation(chirac1))
