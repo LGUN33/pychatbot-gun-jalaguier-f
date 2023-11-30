@@ -135,7 +135,10 @@ def TF_IDF(repertoire):
                 tf = TF(contenu)
                 valeur_idf = idf.get(mot, 0)
                 valeur_tf = tf.get(mot, 0)
-                L.append(valeur_tf * valeur_idf)
+                if valeur_tf==0:
+                    L.append("nul")
+                else:
+                    L.append(valeur_tf * valeur_idf)
         matrice[mot]=L
     return matrice
 
@@ -247,12 +250,12 @@ sarkozy = 'Nomination_Sarkozy.txt'
 
 
 #TEST :
-# nation("cleaned")
-# mot_chirac()
-# convertir_minuscule(chirac1)
-# supprime_ponctuation(chirac1)
-# ajout_prenom("cleaned")
+print(nation("cleaned"))
+# print(mot_chirac())
+# print(convertir_minuscule(chirac1))
+# print(supprime_ponctuation(chirac1))
+# print(ajout_prenom("cleaned"))
 #print(TF_IDF("cleaned"))
-# mot_non_important("cleaned")
-# plusgrand_TF_IDF("cleaned")
-# IDF("cleaned")
+# print(mot_non_important("cleaned"))
+# print(plusgrand_TF_IDF("cleaned"))
+#print(IDF("cleaned"))
