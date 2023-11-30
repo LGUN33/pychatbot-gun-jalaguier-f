@@ -216,6 +216,9 @@ def nation(repertoire):
     return list_nom,nom_final
 
 
+def climat() :
+    pass
+
 def mot_dit(repertoire):
     mot_important=[]
     matrice=TF_IDF(repertoire)
