@@ -1,7 +1,7 @@
 from fonctions import *
 import os
 
-os.system("cls") # réinitialise la console
+os.system("cls") # réinitialise la console.
 
 print("\033[1;31m\nBienvenue sur 'My First Chat Bot' l'intelligence artificielle à la pointe de la technologie (équivalent de ChatGPT® 6) développée par Louis Gun et Frédéric Jalaguier")
 print("\033[1;34m\nVoici la liste des différentes actions que vous pouvez faire : \n")
