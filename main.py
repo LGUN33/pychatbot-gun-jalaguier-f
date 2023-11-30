@@ -42,14 +42,12 @@ elif réponse == 4:
 elif réponse == 5:
     print("\033[1;37mVoici le premier président à parler du climat et/ou de l’écologie : ")
     print("Fonctionnalité à venir...")
-    print(climat())
+    print(climat("cleaned"))
 
 elif réponse == 6:
     print("\033[1;37mVoici le(s) mot(s) que tous les présidents ont évoqués : ")
     print("Fonctionnalité à venir...")
     print(mot_dit("cleaned"))
-
-
 
 
 

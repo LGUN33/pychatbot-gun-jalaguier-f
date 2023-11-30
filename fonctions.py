@@ -218,9 +218,28 @@ def nation(repertoire):
             nom_final=nom
     return list_nom,nom_final
 
+def climat(repertoire):
+    list_nom={}
+    directory = "./" + repertoire
+    files_names = list_of_files(directory, "txt")
+    for i in range(len(files_names)):
+        chemin = os.path.join(directory, files_names[i])
+        with open(chemin, "r") as doc:
+            contenu = doc.read()
+            contenu = contenu.split()
+            president = files_names[i][11:-4]
+            code_asci = ord(president[-1])
+            if code_asci >= 48 and code_asci <= 57:
+                president = president[0:-1]
+            list_nom[president]=list_nom.get(president,0)
+            if "climat" in contenu :
+                ind=contenu.index("climat")
+                list_nom[president]+=ind
+            if "écologie" in contenu :
+                ind=contenu.index("écologie")
+                list_nom[president]+=ind
+    return list_nom
 
-def climat() :
-    pass
 
 def mot_dit(repertoire):
     mot_important=[]
