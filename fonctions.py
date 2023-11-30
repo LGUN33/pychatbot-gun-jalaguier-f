@@ -229,14 +229,79 @@ def mot_dit(repertoire):
     for elt in non_important:
         del matrice[elt]
     for mot,val in matrice.items():
-        i=0
-        while i<len(matrice[mot]) and val[i]!=0.0 :
-            i+=1
-        if i == 8:
+        c = True
+        for i in range (1,8):
+            if val[i]!="nul":
+                c=True
+            else:
+                c=False
+        if val[0]=="nul" and c==True:
             mot_important.append(mot)
+        else:
+            c = True
+            for i in range (2,8):
+                if val[i]!="nul":
+                    c=True
+                else:
+                    c=False
+            if val[1] == "nul" and val[0]!="nul" and c==True:
+                mot_important.append(mot)
+            else:
+                c = True
+                for i in range (0,6):
+                    if val[i]!="nul":
+                        c=True
+                    else:
+                        c=False
+                if val[6]== "nul" and val[7]!="nul"and c==True:
+                    mot_important.append(mot)
+                else:
+                    c = True
+                    for i in range (0,7):
+                        if val[i]!="nul":
+                            c=True
+                        else:
+                            c=False
+                    if val[7]=="nul" and c==True:
+                        mot_important.append(mot)
+                    else:
+                        c = True
+                        for i in range (2,6):
+                            if val[i]!="nul":
+                                c=True
+                            else:
+                                c=False
+                        if val[1]=="nul" and val[6]=="nul" and val[0]!="nul" and val[7]!="nul"and c==True:
+                            mot_important.append(mot)
+                        else:
+                            c = True
+                            for i in range(1, 7):
+                                if val[i] != "nul":
+                                    c = True
+                                else:
+                                    c = False
+                            if val[0]=="nul" and val[7]=="nul" and c==True:
+                                mot_important.append(mot)
+                            else:
+                                c = True
+                                for i in range(1, 6):
+                                    if val[i] != "nul":
+                                        c = True
+                                    else:
+                                        c = False
+                                if val[0]=="nul" and val[6]=="nul" and val[7]!="nul" and c==True:
+                                    mot_important.append(mot)
+                                else:
+                                    c = True
+                                    for i in range(2, 7):
+                                        if val[i] != "nul":
+                                            c = True
+                                        else:
+                                            c = False
+                                    if val[1]=="nul" and val[7]=="nul" and val[0]!="nul" and c==True:
+                                        mot_important.append(mot)
     return mot_important
 
-# mot_dit("cleaned")
 
 chirac1 = 'Nomination_Chirac1.txt'
 chirac2 = 'Nomination_Chirac2.txt'
@@ -250,12 +315,13 @@ sarkozy = 'Nomination_Sarkozy.txt'
 
 
 #TEST :
-#print(nation("cleaned"))
+# print(mot_dit("cleaned"))
+# print(nation("cleaned"))
 # print(mot_chirac())
 # print(convertir_minuscule(chirac1))
 # print(supprime_ponctuation(chirac1))
 # print(ajout_prenom("cleaned"))
-#print(TF_IDF("cleaned"))
+# print(TF_IDF("cleaned"))
 # print(mot_non_important("cleaned"))
 # print(plusgrand_TF_IDF("cleaned"))
-#print(IDF("cleaned"))
+# print(IDF("cleaned"))
