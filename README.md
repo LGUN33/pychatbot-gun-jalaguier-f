@@ -1,5 +1,5 @@
 # pychatbot-gun-jalaguier-f
-
+```bash
   __  __             ______   _                _        _____   _               _       ____            _   
  |  \/  |           |  ____| (_)              | |      / ____| | |             | |     |  _ \          | |  
  | \  / |  _   _    | |__     _   _ __   ___  | |_    | |      | |__     __ _  | |_    | |_) |   ___   | |_ 
@@ -9,7 +9,7 @@
             __/ |                                                                                           
            |___/                                                                                            by Louis GUN and Frédéric Jalaguier
 
-
+```
 Voici la notice d'utilisation de la première vertion de notre 'My first Chat Bot' :
 
 Vous disposez de 2 fichiers : 'fonctions.py' et 'main.py' 
