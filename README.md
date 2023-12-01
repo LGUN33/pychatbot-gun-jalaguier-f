@@ -7,7 +7,8 @@
  | |  | | | |_| |   | |      | | | |    \__ \ | |_    | |____  | | | | | (_| | | |_    | |_) | | (_) | | |_ 
  |_|  |_|  \__, |   |_|      |_| |_|    |___/  \__|    \_____| |_| |_|  \__,_|  \__|   |____/   \___/   \__|
             __/ |                                                                                           
-           |___/                                                                                            by Louis GUN and Frédéric Jalaguier
+           |___/                                                                                            
+  	by Louis GUN and Frédéric Jalaguier
 
 ```
 Voici la notice d'utilisation de la première vertion de notre 'My first Chat Bot' :
