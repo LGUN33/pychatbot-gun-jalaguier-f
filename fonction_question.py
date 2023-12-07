@@ -50,5 +50,11 @@ def recherche_mot_corpus (repertoire,phrase) : # retourne la liste des mots de l
 
 #print(recherche_mot_corpus("cleaned",'je suis un chien homme nation ll france quoicoubeh'))
 
+def TF_IDF_question () :
+    pass
+
+
+print(TF('je suis un chien homme nation ll france quoicoubeh'))
+
 
 
