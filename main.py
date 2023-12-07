@@ -1,4 +1,4 @@
-from fonctions import *
+from fonctions_texte import *
 import os
 
 os.system("cls") # réinitialise la console
