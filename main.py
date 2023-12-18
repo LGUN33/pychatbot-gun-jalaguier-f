@@ -46,7 +46,6 @@ elif réponse == 5:
 
 elif réponse == 6:
     print("\033[1;37mVoici le(s) mot(s) que tous les présidents ont évoqués : ")
-    print("Fonctionnalité à venir...")
     print(mot_dit("cleaned"))
 
 
