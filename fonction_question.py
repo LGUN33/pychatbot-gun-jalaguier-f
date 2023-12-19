@@ -111,10 +111,6 @@ def generateur_fichier_reponse(question):
     print(document_pertinent(TF_IDF_question(question), matrice_corpus_a_partir_question(question)))
 
 
-generateur_fichier_reponse("Peux tu me dire comment une nation peut elle prendre soin du climat")
-
-
-#print(TF('je suis un chien homme nation ll france quoicoubeh'))
 
 
 
