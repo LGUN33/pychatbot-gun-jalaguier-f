@@ -48,8 +48,11 @@ def supprime_ponctuation(fichi) :
 
 def list_of_files(directory, extension):
     files_names = []
+    # Parcours des fichiers dans le répertoire
     for filename in os.listdir(directory):
+        # Vérification de l'extension du fichier
         if filename.endswith(extension):
+            # Ajout du nom du fichier à la liste
             files_names.append(filename)
     return files_names
 
@@ -57,30 +60,37 @@ def list_of_files(directory, extension):
 def recup_nom(repertoire):
     directory = "./" + repertoire
     liste = list_of_files(directory, "txt")
-    nom=[]
+    nom = []
+    # Extraction du nom des présidents à partir des noms de fichiers
     for elt in liste:
-        president=elt[11:-4]
+        president = elt[11:-4]
         code_asci = ord(president[-1])
+        # Vérification du code ASCII du dernier caractère
         if code_asci >= 48 and code_asci <= 57:
             nom.append(president[0:-1])
         else:
             nom.append(president)
-    nom=set(nom)
+    nom = set(nom)
     return nom
 
 
 def ajout_prenom(repertoire):
-    nom=recup_nom(repertoire)
-    nomprenom={}
+    nom = recup_nom(repertoire)
+    nomprenom = {}
+    # Initialisation du dictionnaire avec des valeurs par défaut
     for elt in nom:
-        nomprenom[elt]=1
-    nomprenom['Chirac']='Jacques'
-    nomprenom['Giscard dEstaing']='Valéry'
-    nomprenom['Hollande']='François'
-    nomprenom['Macron']='Emmanuel'
-    nomprenom['Mitterrand']='François'
-    nomprenom['Sarkozy']=('Nicolas')
+        nomprenom[elt] = 1
+    # Ajout de prénoms spécifiques pour certains noms de président
+    nomprenom['Chirac'] = 'Jacques'
+    nomprenom['Giscard dEstaing'] = 'Valéry'
+    nomprenom['Hollande'] = 'François'
+    nomprenom['Macron'] = 'Emmanuel'
+    nomprenom['Mitterrand'] = 'François'
+    nomprenom['Sarkozy'] = 'Nicolas'
     return nomprenom
+
+
+
 
 
 def TF(ch):
@@ -94,30 +104,67 @@ def TF(ch):
     return TF
 
 
+
+
+
 def IDF(repertoire):
-    directory = "./"+repertoire
+    # Construire le chemin du répertoire
+    directory = "./" + repertoire
+
+    # Obtenir la liste des noms de fichiers avec l'extension "txt"
     files_names = list_of_files(directory, "txt")
-    taille= len(files_names)
-    liste_mot=[]
+
+    # Calculer la taille du corpus (nombre total de documents)
+    taille = len(files_names)
+
+    # Initialiser une liste pour stocker tous les mots dans le corpus
+    liste_mot = []
+
+    # Parcourir chaque fichier dans le répertoire
     for elt in files_names:
+        # Construire le chemin complet du fichier
         chemin = os.path.join(directory, elt)
+
+        # Lire le contenu du fichier
         with open(chemin, "r") as doc:
             contenu = doc.read()
-            contenu=contenu.split()
-            liste_mot+=contenu
-    list_mot=set(liste_mot)
-    IDF={}
+
+            # Diviser le contenu en mots et ajouter à la liste
+            contenu = contenu.split()
+            liste_mot += contenu
+
+    # Convertir la liste de mots en un ensemble pour obtenir des mots uniques
+    list_mot = set(liste_mot)
+
+    # Initialiser un dictionnaire pour stocker les scores IDF de chaque mot
+    IDF = {}
+
+    # Calculer le score IDF pour chaque mot dans le corpus
     for mot in list_mot:
-        occurence=0
+        occurence = 0
+
+        # Parcourir chaque fichier dans le répertoire
         for elt in files_names:
+            # Construire le chemin complet du fichier
             chemin = os.path.join(directory, elt)
+
+            # Lire le contenu du fichier
             with open(chemin, "r") as doc:
                 contenu = doc.read()
+
+                # Vérifier si le mot est présent dans le contenu du fichier
                 if mot in contenu:
-                    occurence+=1
-        score=math.log(taille/(occurence))
-        IDF[mot]=score
+                    occurence += 1
+
+        # Calculer le score IDF pour le mot
+        score = math.log(taille / (occurence + 1))  # Ajout de 1 pour éviter une division par zéro
+
+        # Ajouter le score IDF au dictionnaire
+        IDF[mot] = score
+
     return IDF
+
+
 
 
 def TF_IDF(repertoire):
@@ -143,80 +190,143 @@ def TF_IDF(repertoire):
     return matrice
 
 
+
+
 def mot_non_important(repertoire):
-    matrice=TF_IDF(repertoire)
-    mot=[]
-    for key,val in matrice.items():
-        j=0
-        while j<len(matrice[key]) and val[j]==0.0:
+    # Obtenir la matrice TF-IDF du corpus
+    matrice = TF_IDF(repertoire)
+
+    # Initialiser une liste pour stocker les mots non importants
+    mot = []
+
+    # Parcourir chaque mot dans la matrice
+    for key, val in matrice.items():
+        j = 0
+
+        # Chercher la première occurrence non nulle dans le vecteur TF-IDF du mot
+        while j < len(matrice[key]) and val[j] == 0.0:
             j += 1
-        if j==8:
+
+        # Si toutes les occurrences sont nulles, ajouter le mot à la liste des mots non importants
+        if j == 8:
             mot.append(key)
+
     return mot
+
 
 
 def plusgrand_TF_IDF(repertoire):
-    matrice=TF_IDF(repertoire)
-    max_score=0
-    max_mot=[]
-    for mot,score in matrice.items():
-        mot_score=0
+    # Obtenir la matrice TF-IDF du corpus
+    matrice = TF_IDF(repertoire)
+
+    # Initialiser la valeur maximale et la liste des mots ayant le score maximal
+    max_score = 0
+    max_mot = []
+
+    # Parcourir chaque mot et son vecteur TF-IDF dans la matrice
+    for mot, score in matrice.items():
+        mot_score = 0
+
+        # Trouver le score maximal dans le vecteur TF-IDF du mot
         for j in range(8):
-            if score[j]>mot_score:
-                mot_score=score[j]
-        if mot_score>max_score:
-            max_score=mot_score
-            max_mot=[]
+            if score[j] > mot_score:
+                mot_score = score[j]
+
+        # Mettre à jour le score maximal et la liste des mots si nécessaire
+        if mot_score > max_score:
+            max_score = mot_score
+            max_mot = [mot]
+        elif mot_score == max_score:
             max_mot.append(mot)
-        elif mot_score==max_score:
-            max_mot.append(mot)
-    return max_mot,max_score
+
+    return max_mot, max_score
+
 
 
 def mot_chirac():
-    contenu=""
-    for i in range(1,3):
-        chemin = os.path.join("./cleaned",'Nomination_Chirac'+str(i)+'.txt')
+    # Initialiser une chaîne de caractères pour stocker le contenu des fichiers
+    contenu = ""
+
+    # Parcourir les fichiers Nomination_Chirac1.txt et Nomination_Chirac2.txt
+    for i in range(1, 3):
+        chemin = os.path.join("./cleaned", 'Nomination_Chirac' + str(i) + '.txt')
+
+        # Lire le contenu du fichier et ajouter à la chaîne
         with open(chemin, "r") as doc:
-            contenu+=doc.read()
-    dico_mot=TF(contenu)
-    mot=""
-    TF_max=0
-    for elt,val in dico_mot.items():
-        if val>TF_max:
-            TF_max=val
-            mot=""
-            mot+=elt
+            contenu += doc.read()
+
+    # Obtenir un dictionnaire de fréquence des mots (TF) à partir du contenu
+    dico_mot = TF(contenu)
+
+    # Initialiser une chaîne de caractères pour le mot avec le plus grand score TF
+    mot = ""
+
+    # Initialiser le score TF maximum
+    TF_max = 0
+
+    # Parcourir le dictionnaire de fréquence des mots
+    for elt, val in dico_mot.items():
+        # Trouver le mot avec le score TF maximum
+        if val > TF_max:
+            TF_max = val
+            mot = elt
+
     return mot
 
 
+
+
+
 def nation(repertoire):
-    list_nom={}
+    # Initialiser un dictionnaire pour stocker le nombre d'occurrences du mot "nation" pour chaque président
+    list_nom = {}
+
+    # Construire le chemin du répertoire
     directory = "./" + repertoire
+
+    # Obtenir la liste des noms de fichiers avec l'extension "txt"
     files_names = list_of_files(directory, "txt")
+
+    # Parcourir chaque fichier dans le répertoire
     for i in range(len(files_names)):
         chemin = os.path.join(directory, files_names[i])
+
+        # Lire le contenu du fichier
         with open(chemin, "r") as doc:
             contenu = doc.read()
+
+            # Diviser le contenu en mots
             contenu = contenu.split()
+
+            # Extraire le nom du président du nom du fichier
             president = files_names[i][11:-4]
             code_asci = ord(president[-1])
+
+            # Vérifier et ajuster le nom du président si nécessaire
             if code_asci >= 48 and code_asci <= 57:
                 president = president[0:-1]
-            list_nom[president]=list_nom.get(president,0)
+
+            # Initialiser le compteur d'occurrences du mot "nation" pour le président actuel
+            list_nom[president] = list_nom.get(president, 0)
+
+            # Compter le nombre d'occurrences du mot "nation" dans le contenu
             if "nation" in contenu:
-                nbr=0
+                nbr = 0
                 for elt in contenu:
-                    if elt=="nation":
-                        nbr+=1
-                list_nom[president]+=nbr
-    max=0
-    nom_final=""
-    for nom,val in list_nom.items():
-        if val>max:
-            max=val
-            nom_final=nom
-    return list_nom,nom_final
+                    if elt == "nation":
+                        nbr += 1
+                list_nom[president] += nbr
+
+    # Trouver le président avec le plus grand nombre d'occurrences du mot "nation"
+    max = 0
+    nom_final = ""
+    for nom, val in list_nom.items():
+        if val > max:
+            max = val
+            nom_final = nom
+
+    return list_nom, nom_final
+
 
 def climat(repertoire):
     list_nom={}
