@@ -13,12 +13,12 @@
 ```
 Voici la notice d'utilisation de la première version de notre 'My first Chat Bot' :
 
-Vous disposez de 2 fichiers : 'fonctions.py' et 'main.py' 
+Vous disposez de 3 fichiers : 'fonctions_texte.py', 'fonction_question.py' et 'main.py' 
 
 
-________________________________fonction.py________________________________
+________________________________fonction_texte.py________________________________
 
-- 'fonction.py' contiaint les fonctions utiles au programme. Il est compsé de 4 parties :
+- 'fonction_texte.py' contiaint les fonctions utiles au programme au niveau du traitement de texte. Il est compsé de 4 parties :
 
 	- La première est dédiée au traitement de texte. Voici les fonctions :
 
@@ -54,12 +54,26 @@ Lors du lancement, tout est expliqué dans la console
 
 
 
+________________________________fonction_question.py________________________________
+
+Il contient toutes les fonctions utiles au traitement de la question de l'utilisateur. Au niveau du main, il n'est utilisé que quand l'utilisateur presse la touche '7'
+
+
+Il contient des fonctions qui :
+- Traitent la question (ponctuation, majuscules) 
+- Calculent un TF-IDF à la question
+- Comparent les mots de la question à ceux des textes.
+Enfin, il renvoie le texte le plus pertinent pour l'utilisateur.
+
+
 ______________________________________________________________________________________________________________________________________________
 
 Rapport de bugs : 
 
-Pour la fonction climat(), il n'existe pas de mot qui ont tous leurs TF_IDF = 0. Nous sommes certain que l'erreur provient du log() dans la fonction TF_IDF. Nous devons donc trouver une autre solution pour trouver les mots que tous les présidents ont évoqués.
+La fonction TF_IDF_question du fichier "fonction_question.py" ne fonctionne pas, nous n'arrivons pas à trouver de solution par manque de temps.
+Nous avons effectués des tests sans l'utilisation de cette fonction et cela fonctionne à peu près bien.
 
+L'option '7' de l'utilisateur n'est donc pas encore disponible, mais elle ne saurait tarder
 
 ______________________________________________________________________________________________________________________________________________
 
