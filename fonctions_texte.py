@@ -157,7 +157,7 @@ def IDF(repertoire):
                     occurence += 1
 
         # Calculer le score IDF pour le mot
-        score = math.log(taille / (occurence + 1))  # Ajout de 1 pour éviter une division par zéro
+        score = math.log10(taille / (occurence))
 
         # Ajouter le score IDF au dictionnaire
         IDF[mot] = score
