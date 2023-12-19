@@ -1,5 +1,8 @@
+from fonction_question import *
 from fonctions_texte import *
 import os
+
+
 
 os.system("cls") # réinitialise la console
 
@@ -16,7 +19,7 @@ print("\033[1;34mTappez 7 pour : "+"\033[1;35mAccéder au mode Chatbot permettan
 
 réponse = input("\033[1;31mSaisir votre choix : ")
 
-while réponse != '1' and réponse != '2' and réponse != '3' and réponse != '4' and réponse != '5' and réponse != '6' : # saisie sécurisée (nombre entre 1 et 6)
+while réponse != '1' and réponse != '2' and réponse != '3' and réponse != '4' and réponse != '5' and réponse != '6' and réponse != '7' : # saisie sécurisée (nombre entre 1 et 6)
     print("Merci de saisir un chiffre entre 1 et 6")
     réponse = input("\033[1;31mSaisir votre choix : ")
 
@@ -47,6 +50,11 @@ elif réponse == 5:
 elif réponse == 6:
     print("\033[1;37mVoici le(s) mot(s) que tous les présidents ont évoqués : ")
     print(mot_dit("cleaned"))
+
+elif réponse == 7:
+    print("\033[1;37mPosez moi une question : ")
+    ques=input()
+    generateur_fichier_reponse(ques)
 
 
 
