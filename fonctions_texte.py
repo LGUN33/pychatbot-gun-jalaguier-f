@@ -360,74 +360,74 @@ def mot_dit(repertoire):
     for mot,val in matrice.items():
         c = True
         for i in range (1,8):
-            if val[i]!="nul":
+            if val[i]!=0:
                 c=True
             else:
                 c=False
-        if val[0]=="nul" and c==True:
+        if val[0]==0 and c==True:
             mot_important.append(mot)
         else:
             c = True
             for i in range (2,8):
-                if val[i]!="nul":
+                if val[i]!=0:
                     c=True
                 else:
                     c=False
-            if val[1] == "nul" and val[0]!="nul" and c==True:
+            if val[1] == 0 and val[0]!=0 and c==True:
                 mot_important.append(mot)
             else:
                 c = True
                 for i in range (0,6):
-                    if val[i]!="nul":
+                    if val[i]!=0:
                         c=True
                     else:
                         c=False
-                if val[6]== "nul" and val[7]!="nul"and c==True:
+                if val[6]== 0 and val[7]!=0 and c==True:
                     mot_important.append(mot)
                 else:
                     c = True
                     for i in range (0,7):
-                        if val[i]!="nul":
+                        if val[i]!=0:
                             c=True
                         else:
                             c=False
-                    if val[7]=="nul" and c==True:
+                    if val[7]==0 and c==True:
                         mot_important.append(mot)
                     else:
                         c = True
                         for i in range (2,6):
-                            if val[i]!="nul":
+                            if val[i]!=0:
                                 c=True
                             else:
                                 c=False
-                        if val[1]=="nul" and val[6]=="nul" and val[0]!="nul" and val[7]!="nul"and c==True:
+                        if val[1]==0 and val[6]==0 and val[0]!=0 and val[7]!=0 and c==True:
                             mot_important.append(mot)
                         else:
                             c = True
                             for i in range(1, 7):
-                                if val[i] != "nul":
+                                if val[i] != 0:
                                     c = True
                                 else:
                                     c = False
-                            if val[0]=="nul" and val[7]=="nul" and c==True:
+                            if val[0]==0 and val[7]==0 and c==True:
                                 mot_important.append(mot)
                             else:
                                 c = True
                                 for i in range(1, 6):
-                                    if val[i] != "nul":
+                                    if val[i] != 0:
                                         c = True
                                     else:
                                         c = False
-                                if val[0]=="nul" and val[6]=="nul" and val[7]!="nul" and c==True:
+                                if val[0]==0 and val[6]==0 and val[7]!=0 and c==True:
                                     mot_important.append(mot)
                                 else:
                                     c = True
                                     for i in range(2, 7):
-                                        if val[i] != "nul":
+                                        if val[i] != 0:
                                             c = True
                                         else:
                                             c = False
-                                    if val[1]=="nul" and val[7]=="nul" and val[0]!="nul" and c==True:
+                                    if val[1]==0 and val[7]==0 and val[0]!=0 and c==True:
                                         mot_important.append(mot)
     return mot_important
 
