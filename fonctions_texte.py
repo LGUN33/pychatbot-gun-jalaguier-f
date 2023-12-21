@@ -102,28 +102,16 @@ def TF(ch):
 
 
 def IDF(repertoire):
-    # Construire le chemin du répertoire
     directory = "./" + repertoire
-
     # Obtenir la liste des noms de fichiers avec l'extension "txt"
     files_names = list_of_files(directory, "txt")
-
-    # Calculer la taille du corpus (nombre total de documents)
     taille = len(files_names)
-
     # Initialiser une liste pour stocker tous les mots dans le corpus
     liste_mot = []
-
-    # Parcourir chaque fichier dans le répertoire
     for elt in files_names:
-        # Construire le chemin complet du fichier
         chemin = os.path.join(directory, elt)
-
-        # Lire le contenu du fichier
         with open(chemin, "r") as doc:
             contenu = doc.read()
-
-            # Diviser le contenu en mots et ajouter à la liste
             contenu = contenu.split()
             liste_mot += contenu
 
@@ -132,30 +120,23 @@ def IDF(repertoire):
 
     # Initialiser un dictionnaire pour stocker les scores IDF de chaque mot
     IDF = {}
-
     # Calculer le score IDF pour chaque mot dans le corpus
     for mot in list_mot:
         occurence = 0
-
         # Parcourir chaque fichier dans le répertoire
         for elt in files_names:
             # Construire le chemin complet du fichier
             chemin = os.path.join(directory, elt)
-
             # Lire le contenu du fichier
             with open(chemin, "r") as doc:
                 contenu = doc.read()
-
                 # Vérifier si le mot est présent dans le contenu du fichier
                 if mot in contenu:
                     occurence += 1
-
         # Calculer le score IDF pour le mot
         score = math.log10(taille / (occurence))
-
         # Ajouter le score IDF au dictionnaire
         IDF[mot] = score
-
     return IDF
 
 
