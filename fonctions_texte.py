@@ -90,9 +90,6 @@ def ajout_prenom(repertoire):
     return nomprenom
 
 
-
-
-
 def TF(ch):
     TF={}
     ch=ch.split()
@@ -102,9 +99,6 @@ def TF(ch):
         else:
             TF[elt]+=1
     return TF
-
-
-
 
 
 def IDF(repertoire):
@@ -165,8 +159,6 @@ def IDF(repertoire):
     return IDF
 
 
-
-
 def TF_IDF(repertoire):
     matrice = {}
     directory = "./" + repertoire
@@ -190,8 +182,6 @@ def TF_IDF(repertoire):
     return matrice
 
 
-
-
 def mot_non_important(repertoire):
     # Obtenir la matrice TF-IDF du corpus
     matrice = TF_IDF(repertoire)
@@ -212,7 +202,6 @@ def mot_non_important(repertoire):
             mot.append(key)
 
     return mot
-
 
 
 def plusgrand_TF_IDF(repertoire):
@@ -240,7 +229,6 @@ def plusgrand_TF_IDF(repertoire):
             max_mot.append(mot)
 
     return max_mot, max_score
-
 
 
 def mot_chirac():
@@ -272,9 +260,6 @@ def mot_chirac():
             mot = elt
 
     return mot
-
-
-
 
 
 def nation(repertoire):

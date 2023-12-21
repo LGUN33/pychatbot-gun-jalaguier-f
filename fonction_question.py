@@ -3,11 +3,14 @@ from fonctions_texte import *
 from typing import List
 from math import sqrt
 
+
 def produit_scalaire(liste_gauche: List[float], liste_droite: List[float]) -> float:
     return sum(x * y for x, y in zip(liste_gauche, liste_droite))
 
+
 def norm(v: List[float]) -> float:
     return sqrt(sum(map(lambda x: pow(x, 2), v)))
+
 
 def token_question(phrase):# retourne un tableau clean
     # retire les majuscules :
@@ -31,6 +34,7 @@ def token_question(phrase):# retourne un tableau clean
     return(tab_mot)
 
 #print(token_question("salut C'est moi, fred."))
+
 
 def recherche_mot_corpus (repertoire,phrase) : # retourne la liste des mots de la question qui sont dans le corpus de txt
     list_nom = {}
@@ -69,8 +73,10 @@ def TF_IDF_question(question):
 
 #print(TF_IDF_question("quelle sont les valeurs de la france nation ?",))
 
+
 def similarite(L, R):
     return produit_scalaire(L, R) / (norm(L) * norm(R))
+
 
 def matrice_corpus_a_partir_question(question, corpus):
     dictionnaire_tf_idf_corpus = TF_IDF(corpus)
@@ -85,6 +91,9 @@ def matrice_corpus_a_partir_question(question, corpus):
 
     return matrice_corpus
 
+#print(matrice_corpus_a_partir_question("me dire comment une nation peut-elle prendre soin du climat", "cleaned"))
+
+
 def document_pertinent(question_matrix, corpus_matrix, document_names):
     similarity_vector = [
         similarite(question_matrix, document_vector)
@@ -93,6 +102,7 @@ def document_pertinent(question_matrix, corpus_matrix, document_names):
     ]
 
     return document_names[similarity_vector.index(max(similarity_vector))]
+
 
 def generateur_fichier_reponse(question, corpus):
     directory = "./cleaned"
@@ -104,6 +114,7 @@ def generateur_fichier_reponse(question, corpus):
 
 def generation_reponse(question):
     print("et je songe bien sûr à françois hollande, faisant oeuvre de précurseur avec l'accord de paris sur le climat et protégeant les français dans un monde frappé par le terrorisme.")
+
 
 def affiner_reponse():
     question_starters = {"Comment": "Après analyse, ","Pourquoi": "Car, ","Peux-tu": "Oui, bien sûr!"}
