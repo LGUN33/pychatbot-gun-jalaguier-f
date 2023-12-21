@@ -14,12 +14,13 @@ print("\033[1;34mTappez 3 pour : "+"\033[1;35mAfficher le(s) mot(s) le(s) plus r
 print("\033[1;34mTappez 4 pour : "+"\033[1;35mAfficher le(s) nom(s) du (des) président(s) qui a (ont) parlé de la « Nation » et celui qui l’a répété le plus de fois")
 print("\033[1;34mTappez 5 pour : "+"\033[1;35mAfficher le premier président à parler du climat et/ou de l’écologie")
 print("\033[1;34mTappez 6 pour : "+"\033[1;35mAfficher le(s) mot(s) que tous les présidents ont évoqués")
-print("\033[1;34mTappez 7 pour : "+"\033[1;35mAccéder au mode Chatbot permettant à l’utilisateur de poser une question")
+print("\033[1;34mTappez 7 pour : "+"\033[1;35mAfficher la matrice TF-IDF")
+print("\033[1;34mTappez 8 pour : "+"\033[1;35mAccéder au mode Chatbot permettant à l’utilisateur de poser une question")
 
 
 réponse = input("\033[1;31mSaisir votre choix : ")
 
-while réponse != '1' and réponse != '2' and réponse != '3' and réponse != '4' and réponse != '5' and réponse != '6' and réponse != '7' : # saisie sécurisée (nombre entre 1 et 6)
+while réponse != '1' and réponse != '2' and réponse != '3' and réponse != '4' and réponse != '5' and réponse != '6' and réponse != '7' and réponse != '8': # saisie sécurisée (nombre entre 1 et 6)
     print("Merci de saisir un chiffre entre 1 et 6")
     réponse = input("\033[1;31mSaisir votre choix : ")
 
@@ -51,10 +52,17 @@ elif réponse == 6:
     print("\033[1;37mVoici le(s) mot(s) que tous les présidents ont évoqués : ")
     print(mot_dit("cleaned"))
 
-elif réponse == 7:
+elif réponse == 7 :
+    print("\033[1;37mVoici la matrice TF-IF : ")
+    matrice = TF_IDF("cleaned")
+    for mot, val in matrice.items():
+        print(mot, " ", val)
+
+elif réponse == 8:
     print("\033[1;37mPosez moi une question : ")
     ques=input()
-    generateur_fichier_reponse(ques)
+    generateur_fichier_reponse(ques,'cleaned')
+    generation_reponse(ques)
 
 
 

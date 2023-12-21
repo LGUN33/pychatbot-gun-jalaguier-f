@@ -1,8 +1,7 @@
-from os import *
+from os import listdir
 from fonctions_texte import *
 from typing import List
-from math import *
-
+from math import sqrt
 
 def produit_scalaire(liste_gauche: List[float], liste_droite: List[float]) -> float:
     return sum(x * y for x, y in zip(liste_gauche, liste_droite))
@@ -33,8 +32,6 @@ def token_question(phrase):# retourne un tableau clean
 
 #print(token_question("salut C'est moi, fred."))
 
-
-
 def recherche_mot_corpus (repertoire,phrase) : # retourne la liste des mots de la question qui sont dans le corpus de txt
     list_nom = {}
     tab_final=[]
@@ -48,7 +45,7 @@ def recherche_mot_corpus (repertoire,phrase) : # retourne la liste des mots de l
             tab_final.append(mot)
     return(tab_final)
 
-#print(recherche_mot_corpus("cleaned",'je suis un chien homme nation ll france quoicoubeh'))
+#print(recherche_mot_corpus("cleaned",'je suis un bel homme nation efrei ll france quoicoubeh'))
 
 
 def TF_IDF_question(question):
@@ -70,46 +67,43 @@ def TF_IDF_question(question):
             vecteur_tf_idf_question[indice_mot_corpus] = tf_idf_mot
     return vecteur_tf_idf_question
 
-#print(TF_IDF_question("quelle sont les valeurs de la france ?"))
+#print(TF_IDF_question("quelle sont les valeurs de la france nation ?",))
 
-
-def similarite(L,R):
+def similarite(L, R):
     return produit_scalaire(L, R) / (norm(L) * norm(R))
 
-
-def matrice_corpus_a_partir_question(question) :
-    # Obtenir le dictionnaire TF-IDF du corpus
-    dictionnaire_tf_idf_corpus = TF_IDF("cleaned")
+def matrice_corpus_a_partir_question(question, corpus):
+    dictionnaire_tf_idf_corpus = TF_IDF(corpus)
     mots_corpus = list(dictionnaire_tf_idf_corpus.keys())
-    mots_partages = recherche_mot_corpus("cleaned", question)
+    mots_partages = recherche_mot_corpus(corpus, question)
     nombre_documents = len(dictionnaire_tf_idf_corpus[mots_partages[0]])
     matrice_corpus = [[] for _ in range(nombre_documents)]
-    # Remplir la matrice avec les valeurs TF-IDF correspondantes
+
     for mot in mots_partages:
         for indice_document, valeur_tf_idf_mot in enumerate(dictionnaire_tf_idf_corpus[mot]):
             matrice_corpus[indice_document].append(valeur_tf_idf_mot)
 
     return matrice_corpus
 
-#print(matrice_corpus_a_partir_question( "Peux-tu me dire comment une nation peut-elle prendre soin du climat?"))
-
-
-def document_pertinent(question_matrix, corpus_matrix,):
+def document_pertinent(question_matrix, corpus_matrix, document_names):
     similarity_vector = [
         similarite(question_matrix, document_vector)
         for document_vector in corpus_matrix
         if not all(map(lambda x: x == 0.0, document_vector))
     ]
+
+    return document_names[similarity_vector.index(max(similarity_vector))]
+
+def generateur_fichier_reponse(question, corpus):
     directory = "./cleaned"
-    document_names = list_of_files(directory, "txt")
-    return document_names[similarity_vector.index(max(similarity_vector))].name
+    document_names = listdir(directory)
+    question_matrix = TF_IDF_question(question)
+    corpus_matrix = matrice_corpus_a_partir_question(question, corpus)
+    print(document_pertinent(question_matrix, corpus_matrix, document_names))
 
 
+def generation_reponse(question):
+    print("et je songe bien sûr à françois hollande, faisant oeuvre de précurseur avec l'accord de paris sur le climat et protégeant les français dans un monde frappé par le terrorisme.")
 
-def generateur_fichier_reponse(question):
-    print(document_pertinent(TF_IDF_question(question), matrice_corpus_a_partir_question(question)))
-
-
-generateur_fichier_reponse("Peux-tu me dire comment une nation peut-elle prendre soin du climat?")
-
-
+def affiner_reponse():
+    pass
