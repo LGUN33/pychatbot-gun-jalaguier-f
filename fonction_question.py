@@ -8,7 +8,7 @@ def produit_scalaire(liste_gauche: List[float], liste_droite: List[float]) -> fl
     return sum(x * y for x, y in zip(liste_gauche, liste_droite))
 
 
-def norm(v: List[float]) -> float:
+def norm(v):
     return sqrt(sum(map(lambda x: pow(x, 2), v)))
 
 
