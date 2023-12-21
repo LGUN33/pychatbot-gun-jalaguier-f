@@ -106,4 +106,5 @@ def generation_reponse(question):
     print("et je songe bien sûr à françois hollande, faisant oeuvre de précurseur avec l'accord de paris sur le climat et protégeant les français dans un monde frappé par le terrorisme.")
 
 def affiner_reponse():
+    question_starters = {"Comment": "Après analyse, ","Pourquoi": "Car, ","Peux-tu": "Oui, bien sûr!"}
     pass
